@@ -3,27 +3,23 @@ import numpy as np
 from urllib.request import urlopen  
 import json
 
-def fmp_todf(url,tickers):
-
+def get_appended(url,tickers,symbol_seperate=False):
+    '''Return dataframe with tickers' data appended''' 
     url_temp = url
     tempdf = pd.DataFrame()
-    
-    for ticker in tickers: 
+    #iterate through tickers
+    for ticker in tickers:
+        #create valid URL
         final_url = url_temp.replace('***TICKER***',ticker)
-        dlist = get_json(final_url)
-        for d in dlist:
-            #setup df
-            if len(tempdf.columns) == 0:
-                tempdf = pd.DataFrame(columns = d.keys())
-
-            #append date tuple
-            app = pd.Series(data=[v for v in d.values()],index=d.keys(),name=ticker)
-            tempdf = tempdf.append(app)
-
-    #return tempdf
+        try:
+            if symbol_seperate: #if response is in form [str, dict]
+                addsymbol = pd.read_json(json.dumps(pd.read_json(final_url).iloc[0,1]))
+                addsymbol['symbol'] = ticker
+                tempdf = tempdf.append(addsymbol)    
+            else:
+                tempdf = tempdf.append(pd.read_json(final_url))
+        except Exception as e:
+            print(e,'for ticker'+ticker,', continuing.....')
+            
     return tempdf
-
-def get_json(url):
-    response = urlopen(url)
-    data = response.read().decode("utf-8")
-    return json.loads(data)
+        
