@@ -1,0 +1,14 @@
+Notes – starting 2/10/21, 2PM
+
+#####2/10/21#####
+
+general- in future, should have automated creation of schema by injecting primary key into execution string returned by pandas(inability to add primary key post create table increasing length of code)
+
+sqlite- should bounce schemas into their own data structure for later use in looking at schemas
+
+general- need to create rules around table names, categories to prevent later issues
+
+API - "earnings surprises" url is misspelled, must be "earnings SURPISES"
+
+general- skipping SEC Filings (and a couple other things) until general structure is good to go. SEC filings only return a link to the filings, which I will access for each row later. 
+
