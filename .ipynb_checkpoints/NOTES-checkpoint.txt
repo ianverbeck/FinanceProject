@@ -12,3 +12,8 @@ API - "earnings surprises" url is misspelled, must be "earnings SURPISES"
 
 general- skipping SEC Filings (and a couple other things) until general structure is good to go. SEC filings only return a link to the filings, which I will access for each row later. 
 
+#####2/12/2021#####
+
+general - rethinking the best way to go about this.. It is really not practical to download all this data onto a personal computer– where is the real life application for that? It also isn't practical to wait a full minute to download the data using the API every time i need it. Then again, the purpose of this is school review so I think dialing in the scripts on here and limiting local data to 100 tickers is fine. then downloading the rest of the information to AWS servers for large scale processing can be done once the process is at that stage. 
+
+idea - should create seperate sql script before creating python script, or schemas in json, or both. this project definitely already requires some restructuring
