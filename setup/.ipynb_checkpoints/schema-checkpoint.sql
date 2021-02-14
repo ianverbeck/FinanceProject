@@ -9,7 +9,7 @@ CREATE TABLE "CV_PROFILE" (
   "changes" REAL,
   "companyName" TEXT,
   "currency" TEXT,
-  "cik" REAL,
+  "cik" INTEGER,
   "isin" TEXT,
   "cusip" TEXT,
   "exchange" TEXT,
@@ -34,15 +34,16 @@ CREATE TABLE "CV_PROFILE" (
   "isEtf" INTEGER,
   "isActivelyTrading" INTEGER
 );
+
 CREATE TABLE "CV_QUOTE" (
 "symbol" TEXT,
   "name" TEXT,
   "price" REAL,
   "changesPercentage" REAL,
   "change" REAL,
-  "dayLow" REAL,
+  "dayLow" INTEGER,
   "dayHigh" REAL,
-  "yearHigh" INTEGER,
+  "yearHigh" REAL,
   "yearLow" REAL,
   "marketCap" INTEGER,
   "priceAvg50" REAL,
@@ -58,6 +59,7 @@ CREATE TABLE "CV_QUOTE" (
   "sharesOutstanding" INTEGER,
   "timestamp" TIMESTAMP
 );
+
 CREATE TABLE "CV_EXECUTIVES" (
 "title" TEXT,
   "name" TEXT,
@@ -65,8 +67,10 @@ CREATE TABLE "CV_EXECUTIVES" (
   "currencyPay" TEXT,
   "gender" TEXT,
   "yearBorn" REAL,
-  "titleSince" REAL
+  "titleSince" REAL,
+  "symbol" TEXT
 );
+
 CREATE TABLE "CV_FS_INCOME_YR" (
 "date" TIMESTAMP,
   "symbol" TEXT,
@@ -100,9 +104,10 @@ CREATE TABLE "CV_FS_INCOME_YR" (
   "epsdiluted" REAL,
   "weightedAverageShsOut" INTEGER,
   "weightedAverageShsOutDil" INTEGER,
-  "link" TEXT,
-  "finalLink" TEXT
+  "link" REAL,
+  "finalLink" REAL
 );
+
 CREATE TABLE "CV_FS_INCOME_QTR" (
 "date" TIMESTAMP,
   "symbol" TEXT,
@@ -139,6 +144,7 @@ CREATE TABLE "CV_FS_INCOME_QTR" (
   "link" TEXT,
   "finalLink" TEXT
 );
+
 CREATE TABLE "CV_FS_BALANCESHEET_YR" (
 "date" TIMESTAMP,
   "symbol" TEXT,
@@ -185,9 +191,10 @@ CREATE TABLE "CV_FS_BALANCESHEET_YR" (
   "totalInvestments" INTEGER,
   "totalDebt" INTEGER,
   "netDebt" INTEGER,
-  "link" TEXT,
-  "finalLink" TEXT
+  "link" REAL,
+  "finalLink" REAL
 );
+
 CREATE TABLE "CV_FS_BALANCESHEET_QTR" (
 "date" TIMESTAMP,
   "symbol" TEXT,
@@ -214,7 +221,7 @@ CREATE TABLE "CV_FS_BALANCESHEET_QTR" (
   "totalAssets" INTEGER,
   "accountPayables" INTEGER,
   "shortTermDebt" INTEGER,
-  "taxPayables" INTEGER,
+  "taxPayables" REAL,
   "deferredRevenue" INTEGER,
   "otherCurrentLiabilities" INTEGER,
   "totalCurrentLiabilities" INTEGER,
@@ -237,12 +244,13 @@ CREATE TABLE "CV_FS_BALANCESHEET_QTR" (
   "link" TEXT,
   "finalLink" TEXT
 );
+
 CREATE TABLE "CV_FS_CASHFLOW_YR" (
 "date" TIMESTAMP,
   "symbol" TEXT,
   "reportedCurrency" TEXT,
-  "fillingDate" TEXT,
-  "acceptedDate" TEXT,
+  "fillingDate" REAL,
+  "acceptedDate" REAL,
   "period" TEXT,
   "netIncome" INTEGER,
   "depreciationAndAmortization" INTEGER,
@@ -274,9 +282,10 @@ CREATE TABLE "CV_FS_CASHFLOW_YR" (
   "operatingCashFlow" INTEGER,
   "capitalExpenditure" INTEGER,
   "freeCashFlow" INTEGER,
-  "link" TEXT,
-  "finalLink" TEXT
+  "link" REAL,
+  "finalLink" REAL
 );
+
 CREATE TABLE "CV_FS_CASHFLOW_QTR" (
 "date" TIMESTAMP,
   "symbol" TEXT,
@@ -284,39 +293,40 @@ CREATE TABLE "CV_FS_CASHFLOW_QTR" (
   "fillingDate" TEXT,
   "acceptedDate" TEXT,
   "period" TEXT,
-  "netIncome" INTEGER,
-  "depreciationAndAmortization" INTEGER,
+  "netIncome" REAL,
+  "depreciationAndAmortization" REAL,
   "deferredIncomeTax" INTEGER,
   "stockBasedCompensation" INTEGER,
-  "changeInWorkingCapital" INTEGER,
+  "changeInWorkingCapital" REAL,
   "accountsReceivables" INTEGER,
   "inventory" INTEGER,
   "accountsPayables" INTEGER,
   "otherWorkingCapital" INTEGER,
-  "otherNonCashItems" INTEGER,
-  "netCashProvidedByOperatingActivities" INTEGER,
+  "otherNonCashItems" REAL,
+  "netCashProvidedByOperatingActivities" REAL,
   "investmentsInPropertyPlantAndEquipment" INTEGER,
   "acquisitionsNet" INTEGER,
   "purchasesOfInvestments" INTEGER,
   "salesMaturitiesOfInvestments" INTEGER,
   "otherInvestingActivites" INTEGER,
-  "netCashUsedForInvestingActivites" INTEGER,
+  "netCashUsedForInvestingActivites" REAL,
   "debtRepayment" INTEGER,
   "commonStockIssued" INTEGER,
   "commonStockRepurchased" INTEGER,
   "dividendsPaid" INTEGER,
   "otherFinancingActivites" INTEGER,
-  "netCashUsedProvidedByFinancingActivities" INTEGER,
-  "effectOfForexChangesOnCash" INTEGER,
-  "netChangeInCash" INTEGER,
-  "cashAtEndOfPeriod" INTEGER,
+  "netCashUsedProvidedByFinancingActivities" REAL,
+  "effectOfForexChangesOnCash" REAL,
+  "netChangeInCash" REAL,
+  "cashAtEndOfPeriod" REAL,
   "cashAtBeginningOfPeriod" INTEGER,
-  "operatingCashFlow" INTEGER,
-  "capitalExpenditure" INTEGER,
-  "freeCashFlow" INTEGER,
-  "link" TEXT,
-  "finalLink" TEXT
+  "operatingCashFlow" REAL,
+  "capitalExpenditure" REAL,
+  "freeCashFlow" REAL,
+  "link" REAL,
+  "finalLink" REAL
 );
+
 CREATE TABLE "CV_FS_INCOMEGROWTH_YR" (
 "date" TIMESTAMP,
   "symbol" TEXT,
@@ -327,8 +337,8 @@ CREATE TABLE "CV_FS_INCOMEGROWTH_YR" (
   "growthGrossProfitRatio" REAL,
   "growthResearchAndDevelopmentExpenses" REAL,
   "growthGeneralAndAdministrativeExpenses" REAL,
-  "growthSellingAndMarketingExpenses" REAL,
-  "growthOtherExpenses" REAL,
+  "growthSellingAndMarketingExpenses" INTEGER,
+  "growthOtherExpenses" INTEGER,
   "growthOperatingExpenses" REAL,
   "growthCostAndExpenses" REAL,
   "growthInterestExpense" REAL,
@@ -348,6 +358,7 @@ CREATE TABLE "CV_FS_INCOMEGROWTH_YR" (
   "growthWeightedAverageShsOut" REAL,
   "growthWeightedAverageShsOutDil" REAL
 );
+
 CREATE TABLE "CV_FS_BALANCEGROWTH_YR" (
 "date" TIMESTAMP,
   "symbol" TEXT,
@@ -364,20 +375,20 @@ CREATE TABLE "CV_FS_BALANCEGROWTH_YR" (
   "growthIntangibleAssets" REAL,
   "growthGoodwillAndIntangibleAssets" REAL,
   "growthLongTermInvestments" REAL,
-  "growthTaxAssets" REAL,
+  "growthTaxAssets" INTEGER,
   "growthOtherNonCurrentAssets" REAL,
   "growthTotalNonCurrentAssets" REAL,
   "growthOtherAssets" REAL,
   "growthTotalAssets" REAL,
   "growthAccountPayables" REAL,
-  "growthShortTermDebt" INTEGER,
-  "growthTaxPayables" REAL,
-  "growthDeferredRevenue" REAL,
+  "growthShortTermDebt" REAL,
+  "growthTaxPayables" INTEGER,
+  "growthDeferredRevenue" INTEGER,
   "growthOtherCurrentLiabilities" REAL,
   "growthTotalCurrentLiabilities" REAL,
   "growthLongTermDebt" REAL,
-  "growthDeferredRevenueNonCurrent" REAL,
-  "growthDeferrredTaxLiabilitiesNonCurrent" REAL,
+  "growthDeferredRevenueNonCurrent" INTEGER,
+  "growthDeferrredTaxLiabilitiesNonCurrent" INTEGER,
   "growthOtherNonCurrentLiabilities" REAL,
   "growthTotalNonCurrentLiabilities" REAL,
   "growthOtherLiabilities" REAL,
@@ -392,6 +403,7 @@ CREATE TABLE "CV_FS_BALANCEGROWTH_YR" (
   "growthTotalDebt" REAL,
   "growthNetDebt" REAL
 );
+
 CREATE TABLE "CV_FS_CASHGROWTH_YR" (
 "date" TIMESTAMP,
   "symbol" TEXT,
@@ -399,25 +411,25 @@ CREATE TABLE "CV_FS_CASHGROWTH_YR" (
   "growthNetIncome" REAL,
   "growthDepreciationAndAmortization" REAL,
   "growthDeferredIncomeTax" REAL,
-  "growthStockBasedCompensation" REAL,
+  "growthStockBasedCompensation" INTEGER,
   "growthChangeInWorkingCapital" REAL,
   "growthAccountsReceivables" REAL,
-  "growthInventory" INTEGER,
+  "growthInventory" REAL,
   "growthAccountsPayables" REAL,
-  "growthOtherWorkingCapital" REAL,
+  "growthOtherWorkingCapital" INTEGER,
   "growthOtherNonCashItems" REAL,
   "growthNetCashProvidedByOperatingActivites" REAL,
-  "growthInvestmentsInPropertyPlantAndEquipment" REAL,
-  "growthAcquisitionsNet" REAL,
-  "growthPurchasesOfInvestments" REAL,
-  "growthSalesMaturitiesOfInvestments" REAL,
-  "growthOtherInvestingActivites" REAL,
+  "growthInvestmentsInPropertyPlantAndEquipment" INTEGER,
+  "growthAcquisitionsNet" INTEGER,
+  "growthPurchasesOfInvestments" INTEGER,
+  "growthSalesMaturitiesOfInvestments" INTEGER,
+  "growthOtherInvestingActivites" INTEGER,
   "growthNetCashUsedForInvestingActivites" REAL,
-  "growthDebtRepayment" REAL,
+  "growthDebtRepayment" INTEGER,
   "growthCommonStockIssued" INTEGER,
   "growthCommonStockRepurchased" REAL,
   "growthDividendsPaid" INTEGER,
-  "growthOtherFinancingActivites" REAL,
+  "growthOtherFinancingActivites" INTEGER,
   "growthNetCashUsedProvidedByFinancingActivities" REAL,
   "growthEffectOfForexChangesOnCash" REAL,
   "growthNetChangeInCash" REAL,
@@ -427,6 +439,7 @@ CREATE TABLE "CV_FS_CASHGROWTH_YR" (
   "growthCapitalExpenditure" REAL,
   "growthFreeCashFlow" REAL
 );
+
 CREATE TABLE "CV_RATIOS_TTM" (
 "dividendYielTTM" REAL,
   "dividendYielPercentageTTM" REAL,
@@ -484,8 +497,10 @@ CREATE TABLE "CV_RATIOS_TTM" (
   "priceSalesRatioTTM" REAL,
   "dividendYieldTTM" REAL,
   "enterpriseValueMultipleTTM" REAL,
-  "priceFairValueTTM" REAL
+  "priceFairValueTTM" REAL,
+  "symbol" TEXT
 );
+
 CREATE TABLE "CV_RATIOS_YR" (
 "symbol" TEXT,
   "date" TIMESTAMP,
@@ -544,7 +559,8 @@ CREATE TABLE "CV_RATIOS_YR" (
   "enterpriseValueMultiple" REAL,
   "priceFairValue" REAL
 );
-CREATE TABLE "CV_RATIOSQ_QTR" (
+
+CREATE TABLE "CV_RATIOS_QTR" (
 "symbol" TEXT,
   "date" TIMESTAMP,
   "currentRatio" REAL,
@@ -564,7 +580,7 @@ CREATE TABLE "CV_RATIOSQ_QTR" (
   "returnOnEquity" REAL,
   "returnOnCapitalEmployed" REAL,
   "netIncomePerEBT" REAL,
-  "ebtPerEbit" INTEGER,
+  "ebtPerEbit" REAL,
   "ebitPerRevenue" REAL,
   "debtRatio" REAL,
   "debtEquityRatio" REAL,
@@ -581,7 +597,7 @@ CREATE TABLE "CV_RATIOSQ_QTR" (
   "operatingCashFlowPerShare" REAL,
   "freeCashFlowPerShare" REAL,
   "cashPerShare" REAL,
-  "payoutRatio" INTEGER,
+  "payoutRatio" REAL,
   "operatingCashFlowSalesRatio" REAL,
   "freeCashFlowOperatingCashFlowRatio" REAL,
   "cashFlowCoverageRatios" REAL,
@@ -602,6 +618,7 @@ CREATE TABLE "CV_RATIOSQ_QTR" (
   "enterpriseValueMultiple" REAL,
   "priceFairValue" REAL
 );
+
 CREATE TABLE "CV_ENTERPRISEVALUE_YR" (
 "symbol" TEXT,
   "date" TIMESTAMP,
@@ -612,6 +629,7 @@ CREATE TABLE "CV_ENTERPRISEVALUE_YR" (
   "addTotalDebt" INTEGER,
   "enterpriseValue" REAL
 );
+
 CREATE TABLE "CV_ENTERPRISEVALUE_QTR" (
 "symbol" TEXT,
   "date" TIMESTAMP,
@@ -622,6 +640,7 @@ CREATE TABLE "CV_ENTERPRISEVALUE_QTR" (
   "addTotalDebt" INTEGER,
   "enterpriseValue" REAL
 );
+
 CREATE TABLE "CV_METRICS_TTM" (
 "revenuePerShareTTM" REAL,
   "netIncomePerShareTTM" REAL,
@@ -660,8 +679,8 @@ CREATE TABLE "CV_METRICS_TTM" (
   "intangiblesToTotalAssetsTTM" REAL,
   "capexToOperatingCashFlowTTM" REAL,
   "capexToRevenueTTM" REAL,
-  "capexToDepreciationTTM" REAL,
-  "stockBasedCompensationToRevenueTTM" REAL,
+  "capexToDepreciationTTM" INTEGER,
+  "stockBasedCompensationToRevenueTTM" INTEGER,
   "grahamNumberTTM" REAL,
   "roicTTM" REAL,
   "returnOnTangibleAssetsTTM" REAL,
@@ -680,8 +699,10 @@ CREATE TABLE "CV_METRICS_TTM" (
   "payablesTurnoverTTM" REAL,
   "inventoryTurnoverTTM" REAL,
   "roeTTM" REAL,
-  "capexPerShareTTM" REAL
+  "capexPerShareTTM" REAL,
+  "symbol" TEXT
 );
+
 CREATE TABLE "CV_METRICS_YR" (
 "symbol" TEXT,
   "date" TIMESTAMP,
@@ -728,12 +749,12 @@ CREATE TABLE "CV_METRICS_YR" (
   "returnOnTangibleAssets" REAL,
   "grahamNetNet" REAL,
   "workingCapital" INTEGER,
-  "tangibleAssetValue" INTEGER,
+  "tangibleAssetValue" REAL,
   "netCurrentAssetValue" INTEGER,
   "investedCapital" REAL,
   "averageReceivables" INTEGER,
   "averagePayables" INTEGER,
-  "averageInventory" REAL,
+  "averageInventory" INTEGER,
   "daysSalesOutstanding" REAL,
   "daysPayablesOutstanding" REAL,
   "daysOfInventoryOnHand" REAL,
@@ -743,6 +764,7 @@ CREATE TABLE "CV_METRICS_YR" (
   "roe" REAL,
   "capexPerShare" REAL
 );
+
 CREATE TABLE "CV_METRICS_QTR" (
 "symbol" TEXT,
   "date" TIMESTAMP,
@@ -776,25 +798,25 @@ CREATE TABLE "CV_METRICS_QTR" (
   "interestCoverage" REAL,
   "incomeQuality" REAL,
   "dividendYield" REAL,
-  "payoutRatio" INTEGER,
+  "payoutRatio" REAL,
   "salesGeneralAndAdministrativeToRevenue" REAL,
   "researchAndDdevelopementToRevenue" REAL,
   "intangiblesToTotalAssets" REAL,
   "capexToOperatingCashFlow" REAL,
   "capexToRevenue" REAL,
   "capexToDepreciation" REAL,
-  "stockBasedCompensationToRevenue" REAL,
+  "stockBasedCompensationToRevenue" INTEGER,
   "grahamNumber" REAL,
   "roic" REAL,
   "returnOnTangibleAssets" REAL,
   "grahamNetNet" REAL,
   "workingCapital" INTEGER,
-  "tangibleAssetValue" INTEGER,
+  "tangibleAssetValue" REAL,
   "netCurrentAssetValue" INTEGER,
   "investedCapital" REAL,
   "averageReceivables" INTEGER,
   "averagePayables" INTEGER,
-  "averageInventory" REAL,
+  "averageInventory" INTEGER,
   "daysSalesOutstanding" REAL,
   "daysPayablesOutstanding" REAL,
   "daysOfInventoryOnHand" REAL,
@@ -804,6 +826,7 @@ CREATE TABLE "CV_METRICS_QTR" (
   "roe" REAL,
   "capexPerShare" REAL
 );
+
 CREATE TABLE "CV_GROWTH_YR" (
 "symbol" TEXT,
   "date" TIMESTAMP,
@@ -842,6 +865,7 @@ CREATE TABLE "CV_GROWTH_YR" (
   "rdexpenseGrowth" REAL,
   "sgaexpensesGrowth" REAL
 );
+
 CREATE TABLE "CV_GROWTH_QTR" (
 "symbol" TEXT,
   "date" TIMESTAMP,
@@ -857,18 +881,18 @@ CREATE TABLE "CV_GROWTH_QTR" (
   "dividendsperShareGrowth" INTEGER,
   "operatingCashFlowGrowth" REAL,
   "freeCashFlowGrowth" REAL,
-  "tenYRevenueGrowthPerShare" REAL,
-  "fiveYRevenueGrowthPerShare" REAL,
-  "threeYRevenueGrowthPerShare" REAL,
-  "tenYOperatingCFGrowthPerShare" REAL,
-  "fiveYOperatingCFGrowthPerShare" REAL,
-  "threeYOperatingCFGrowthPerShare" REAL,
-  "tenYNetIncomeGrowthPerShare" REAL,
-  "fiveYNetIncomeGrowthPerShare" REAL,
-  "threeYNetIncomeGrowthPerShare" REAL,
-  "tenYShareholdersEquityGrowthPerShare" REAL,
-  "fiveYShareholdersEquityGrowthPerShare" REAL,
-  "threeYShareholdersEquityGrowthPerShare" REAL,
+  "tenYRevenueGrowthPerShare" INTEGER,
+  "fiveYRevenueGrowthPerShare" INTEGER,
+  "threeYRevenueGrowthPerShare" INTEGER,
+  "tenYOperatingCFGrowthPerShare" INTEGER,
+  "fiveYOperatingCFGrowthPerShare" INTEGER,
+  "threeYOperatingCFGrowthPerShare" INTEGER,
+  "tenYNetIncomeGrowthPerShare" INTEGER,
+  "fiveYNetIncomeGrowthPerShare" INTEGER,
+  "threeYNetIncomeGrowthPerShare" INTEGER,
+  "tenYShareholdersEquityGrowthPerShare" INTEGER,
+  "fiveYShareholdersEquityGrowthPerShare" INTEGER,
+  "threeYShareholdersEquityGrowthPerShare" INTEGER,
   "tenYDividendperShareGrowthPerShare" INTEGER,
   "fiveYDividendperShareGrowthPerShare" INTEGER,
   "threeYDividendperShareGrowthPerShare" INTEGER,
@@ -880,22 +904,4 @@ CREATE TABLE "CV_GROWTH_QTR" (
   "rdexpenseGrowth" REAL,
   "sgaexpensesGrowth" REAL
 );
-CREATE TABLE "CV_RATING" (
-"symbol" TEXT,
-  "date" TIMESTAMP,
-  "rating" TEXT,
-  "ratingScore" INTEGER,
-  "ratingRecommendation" TEXT,
-  "ratingDetailsDCFScore" INTEGER,
-  "ratingDetailsDCFRecommendation" TEXT,
-  "ratingDetailsROEScore" INTEGER,
-  "ratingDetailsROERecommendation" TEXT,
-  "ratingDetailsROAScore" INTEGER,
-  "ratingDetailsROARecommendation" TEXT,
-  "ratingDetailsDEScore" INTEGER,
-  "ratingDetailsDERecommendation" TEXT,
-  "ratingDetailsPEScore" INTEGER,
-  "ratingDetailsPERecommendation" TEXT,
-  "ratingDetailsPBScore" INTEGER,
-  "ratingDetailsPBRecommendation" TEXT
-);
+
