@@ -70,5 +70,20 @@
 "TS_BIASFREE":"NONE",
 
 "TI_DAILY":"NONE",
-"TI_INTRADAY":"NONE"
+"TI_INTRADAY":"NONE",
+
+"MI_MAJORINDEXES":"https://financialmodelingprep.com/api/v3/quotes/index?apikey=",
+"MI_SP500LIST":"https://financialmodelingprep.com/api/v3/sp500_constituent?apikey=",
+"MI_SP500HIST":"https://financialmodelingprep.com/api/v3/historical/sp500_constituent?apikey=",
+"MI_NASDAQLIST":"https://financialmodelingprep.com/api/v3/nasdaq_constituent?apikey=",
+"MI_NASDAQHISTLIST":"https://financialmodelingprep.com/api/v3/historical/nasdaq_constituent?apikey=",
+"MI_DOWJLIST":"https://financialmodelingprep.com/api/v3/dowjones_constituent?apikey=",
+"MI_DOWJHISTLIST":"https://financialmodelingprep.com/api/v3/historical/dowjones_constituent?apikey=",
+"MI_INDEXPRICEHIST_DAY":{"MI_SP500HIST":"https://financialmodelingprep.com/api/v3/historical-price-full/%5EGSPC?apikey=",
+                     "MI_NASDAQHIST":"https://financialmodelingprep.com/api/v3/historical-price-full/%5EIXIC?apikey=",
+                     "MI_DOWJHIST":"https://financialmodelingprep.com/api/v3/historical-price-full/%5EDJI?apikey="}
+
+    
+
+
 }

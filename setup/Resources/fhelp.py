@@ -41,18 +41,22 @@ def get_appended2(url,tickers,apikey,symbol_seperate=False,verbose=False):
         try:
 
             ttdf = pd.read_json(final_url)
-            
+            tickname = ticker
             #handle differnt json variations from the API
             if ttdf.shape[1] == 2:
-                if ttdf.shape[0] == 1:
+                if ttdf.shape[0] == 1: # if one large 
+                    tickname =  ttdf.iloc[0,0] #assignsymbol
                     ttdf = pd.read_json(json.dumps(pd.read_json(final_url).iloc[0,1]))
-                else: 
+                else: #if list of dictionary values
+                    tickname = ttdf.iloc[0,0] #assignsymbol
                     ttdf = ttdf.iloc[:,1].apply(lambda h: pd.Series(h))
             #add symbol column if none
             if 'symbol' not in ttdf.columns:
-                print('NAMER-------------')
-                ttdf['symbol'] = ticker
-            display(ttdf)
+                if verbose:
+                    print('NAMER-------------')
+                ttdf['symbol'] = tickname
+            if verbose:
+                display(ttdf)
             tempdf = tempdf.append(ttdf)
         except Exception as e:
             print(e,' for ticker '+ticker+', continuing.....')
