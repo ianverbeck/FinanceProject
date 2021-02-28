@@ -1,0 +1,3 @@
+###Write out of db into unix pipeline###
+sqlite3 Finances.db "select * from TS_PRICE_DAY" | grep 'AAPL' > aplprice.tbl
+###
