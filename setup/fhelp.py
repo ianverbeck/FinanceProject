@@ -10,9 +10,13 @@ def get_appended(url,apikey,name,tickers=None,verbose=False):
     
     json = name[1] 
     batch = name[2]
+    addsymbol = False
 
     url_temp = url
     tempdf = pd.DataFrame()
+    if name in ['T1_INST_HOLDERS','T1_INST_MUTFUNDHOLDERS',
+                'E1_INST_ETFHOLDERS','E1_INST_ETFSECTORWEIGHTS','E1_INST_ETFCOUNTRYWEIGHTS']:
+        addsymbol = True
     
     if tickers:
         
@@ -25,14 +29,28 @@ def get_appended(url,apikey,name,tickers=None,verbose=False):
                     stop = (i+1) * BATCH_SIZE -1
                     final_url = url_temp.replace(' ',','.join(tickers[start:stop])) + apikey
                     try:
-                        #TODO: make sure df has symbol for batch requests too
                         tempdf = tempdf.append(pd.read_json(final_url))
                     except Exception as e:
                         print(e, '....batch of {} failed'.format(BATCH_SIZE))
                         ###LOG FAILED BATCH REQUEST AND ADD TO QUEUE FOR LATER
-            elif json == '2':
-                pass
+            elif json == '3':
+                for i in range(iterations):
+                    start = i * BATCH_SIZE
+                    stop = (i+1) * BATCH_SIZE -1
+                    final_url = url_temp.replace(' ',','.join(tickers[start:stop])) + apikey
+                    try:
+                        jsony = pd.read_json(final_url)
+                        #could use some nested functional programming here to speed things up. will stay iterative for now due to small amount of actual iterations (max 3) and negligible (for my purposes) time added
+                        for i in range(len(jsony)):
+                            jsonx = pd.DataFrame(jsony.iloc[i,0])
+                            symbname = jsonx.columns[0]
+                            df = jsonx.iloc[:,1].apply(lambda x: pd.Series(x))
+                            df[symbname] = jsonx.loc[0,symbname]
+                            tempdf = tempdf.append((df))
+                    except Exception as e :
+                        print(e, '....batch of {} failed'.format(BATCH_SIZE))
             else:
+                raise Exception('JSON AND BATCH TYPE NOT COMPATIBLE')
                 
                 
         else:
@@ -47,7 +65,11 @@ def get_appended(url,apikey,name,tickers=None,verbose=False):
                 try:
 
                     if json == '1':
-                        tempdf = tempdf.append(pd.read_json(final_url))
+                        df = pd.read_json(final_url)
+                        if addsymbol:
+                            df['symbol'] = ticker
+                        tempdf = tempdf.append(df)
+
                     else:
                         jsonx = pd.read_json(final_url)
                         symbname = jsonx.columns[0]
@@ -79,6 +101,9 @@ def get_appended(url,apikey,name,tickers=None,verbose=False):
             tempdf = process_datesIT(tempdf,name) #process dates
     
     return tempdf
+
+
+
 
 def process_dates(tab2):
     """NOT WORKING – NOT ABLE TO ASSIGN SLICE OF DATAFRAME TO ARRAY, TRIED IT EVERY WHICH WAY––– RELUCTANTLY USE ITERATIVE VERSION"""

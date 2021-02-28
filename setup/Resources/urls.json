@@ -1,6 +1,6 @@
 {
-"T1b1000_CV_PROFILE":"https://financialmodelingprep.com/api/v3/profile/ ?apikey=",
-"T1b1000_CV_QUOTE":"https://financialmodelingprep.com/api/v3/quote/ ?apikey=",
+"P1b1000_CV_PROFILE":"https://financialmodelingprep.com/api/v3/profile/ ?apikey=",
+"H1b1000_CV_QUOTE":"https://financialmodelingprep.com/api/v3/quote/ ?apikey=",
 "S1_CV_EXECUTIVES":"https://financialmodelingprep.com/api/v3/key-executives/ ?apikey=",
 "UG1_CV_SEARCH":"NONE",
 "S1_CV_FS_INCOME_YR":"https://financialmodelingprep.com/api/v3/income-statement/ ?limit=50&apikey=",
@@ -65,9 +65,9 @@
 
 "UT1_TS_PRICE":"NONE",
 "UX1_TS_PRICELIST":"NONE",
-"H3b5_TS_PRICE_DAY":"https://financialmodelingprep.com/api/v3/historical-price-full/ ?timeseries=18250&apikey=",
-"H3b5_TS_DIVIDENDS_HIST":"https://financialmodelingprep.com/api/v3/historical-price-full/stock_dividend/ ?apikey=",
-"H3b5_TS_SPLITS_HIST":"https://financialmodelingprep.com/api/v3/historical-price-full/stock_split/ ?apikey=",
+"T3b3_TS_PRICE_DAY":"https://financialmodelingprep.com/api/v3/historical-price-full/ ?timeseries=18250&apikey=",
+"T3b3_TS_DIVIDENDS_HIST":"https://financialmodelingprep.com/api/v3/historical-price-full/stock_dividend/ ?apikey=",
+"T3b3_TS_SPLITS_HIST":"https://financialmodelingprep.com/api/v3/historical-price-full/stock_split/ ?apikey=",
 "UT1_TS_BIASFREE":"NONE",
 
 "UT1_TI_DAILY":"NONE",
@@ -80,7 +80,7 @@
 "G1_MI_NASDAQHISTLIST":"https://financialmodelingprep.com/api/v3/historical/nasdaq_constituent?apikey=",
 "G1_MI_DOWJLIST":"https://financialmodelingprep.com/api/v3/dowjones_constituent?apikey=",
 "G1_MI_DOWJHISTLIST":"https://financialmodelingprep.com/api/v3/historical/dowjones_constituent?apikey=",
-"I1b5_MI_INDEXPRICEHIST_DAY":"https://financialmodelingprep.com/api/v3/historical-price-full/ ?apikey=",
+"I3b3_MI_INDEXPRICEHIST_DAY":"https://financialmodelingprep.com/api/v3/historical-price-full/ ?apikey=",
 
 "UG1_AD_COTSYMBOLLIST":"NONE",
 "UG1_AD_COTREPORT":"NONE",
@@ -88,7 +88,7 @@
 
 "G1_COM_SYMBOLS":"https://financialmodelingprep.com/api/v3/symbol/available-commodities?apikey=",
 "G1_COM_PRICES":"https://financialmodelingprep.com/api/v3/quotes/commodity?apikey=",
-"UC2_COM_PRICES_DAY":"NONE",
+"C3b3_COM_PRICES_DAY":"https://financialmodelingprep.com/api/v3/historical-price-full/ ?timeseries=18250&apikey=",
 
 "G1_ETF_SYMBOLS":"https://financialmodelingprep.com/api/v3/symbol/available-etfs?apikey=",
 "G1_ETF_PRICES":"https://financialmodelingprep.com/api/v3/quotes/etf?apikey=",
@@ -96,7 +96,7 @@
 
 "G1_MF_SYMBOLS":"https://financialmodelingprep.com/api/v3/symbol/available-mutual-funds?apikey=",
 "G1_MF_PRICES":"https://financialmodelingprep.com/api/v3/quotes/mutual_fund?apikey=",
-"U_MF_PRICES_DAY":"NONE",
+"M3b3_MF_PRICES_DAY":"https://financialmodelingprep.com/api/v3/historical-price-full/ ?timeseries=18250&apikey=",
 
 "U_EURO_PRICES":"NONE",
 "U_EURO_PRICES_DAY":"NONE",
