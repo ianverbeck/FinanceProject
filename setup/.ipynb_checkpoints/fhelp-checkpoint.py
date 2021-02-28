@@ -4,6 +4,7 @@ from urllib.request import urlopen
 import json
 import datetime
 import dateutil.relativedelta as relativedelta
+import requests
 
 def get_appended(url,apikey,name,tickers=None,verbose=False):
     '''Return dataframe data appended from batch api request''' 
@@ -26,8 +27,10 @@ def get_appended(url,apikey,name,tickers=None,verbose=False):
             if json == '1':     ###REFACTOR THIS TO IF INSIDE FOR
                 for i in range(iterations):
                     start = i * BATCH_SIZE
-                    stop = (i+1) * BATCH_SIZE -1
+                    stop = (i+1) * BATCH_SIZE 
                     final_url = url_temp.replace(' ',','.join(tickers[start:stop])) + apikey
+                    if verbose:
+                        print('Running Batch: {}'.format(','.join(tickers[start:stop])))
                     try:
                         tempdf = tempdf.append(pd.read_json(final_url))
                     except Exception as e:
@@ -36,16 +39,27 @@ def get_appended(url,apikey,name,tickers=None,verbose=False):
             elif json == '3':
                 for i in range(iterations):
                     start = i * BATCH_SIZE
-                    stop = (i+1) * BATCH_SIZE -1
-                    final_url = url_temp.replace(' ',','.join(tickers[start:stop])) + apikey
+                    stop = (i+1) * BATCH_SIZE 
+                    if name[0] == 'I':
+                        ticks = [t.replace('^','%5E') for t in tickers[start:stop]]
+                    else:
+                        ticks = tickers[start:stop]
+                    final_url = url_temp.replace(' ',','.join(ticks)) + apikey
                     try:
+                        
                         jsony = pd.read_json(final_url)
                         #could use some nested functional programming here to speed things up. will stay iterative for now due to small amount of actual iterations (max 3) and negligible (for my purposes) time added
-                        for i in range(len(jsony)):
-                            jsonx = pd.DataFrame(jsony.iloc[i,0])
-                            symbname = jsonx.columns[0]
-                            df = jsonx.iloc[:,1].apply(lambda x: pd.Series(x))
-                            df[symbname] = jsonx.loc[0,symbname]
+                        if len(jsony) <= 3:
+                            for i in range(len(jsony)):
+                                jsonx = pd.DataFrame(jsony.iloc[i,0])
+                                symbname = jsonx.columns[0]
+                                df = jsonx.iloc[:,1].apply(lambda x: pd.Series(x))
+                                df[symbname] = jsonx.loc[0,symbname]
+                                tempdf = tempdf.append((df))
+                        else:
+                            symbname = jsony.columns[0]
+                            df = jsony.iloc[:,1].apply(lambda x: pd.Series(x))
+                            df[symbname] = jsony.loc[0,symbname]
                             tempdf = tempdf.append((df))
                     except Exception as e :
                         print(e, '....batch of {} failed'.format(BATCH_SIZE))
