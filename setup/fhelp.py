@@ -112,7 +112,7 @@ def get_appended(url,apikey,name,tickers=None,verbose=False):
 
     if 'date' in tempdf.columns: #temporary fix for noisy date columns
         if len(tempdf.date.apply(lambda x: type(x)).value_counts())>1:
-            tempdf = process_datesIT(tempdf,name) #process dates
+            tempdf = processDatesIT(tempdf,name) #process dates
 
     return tempdf
 
@@ -153,8 +153,8 @@ def processDatesIT(df,tablename):
         df.loc[i,'date'] = pd.Timestamp(df.loc[i,'date'])
     #impute
     for i in nodate.index:
-        print(nodate.index)
-        newdate = find_nearest(df,i,timedelta)
+        #print(nodate.index)
+        newdate = findNearest(df,i,timedelta)
         df.loc[i,'date'] = pd.Timestamp(newdate)
 
     #df.date = df.date.astype(str)
