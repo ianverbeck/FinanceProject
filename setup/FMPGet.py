@@ -13,7 +13,7 @@ from getFunctions import getGeneralTable, getTable, ReqInfo
 from alive_progress import alive_bar
 class FMPGet:
     
-    def __init__(self,apikey,tickerset='dow',db_name='default',url_path = 'Resources/urls.json'):
+    def __init__(self,apikey,tickerset='dow',db_name='default',url_path = 'Resources/urls.json',tickerlist=None):
         '''Constructor for FMPGet object.
         
         Parameters
@@ -29,6 +29,10 @@ class FMPGet:
             
         url_path: str, default 'Resources/urls.json'
             Path to json file with TABLENAME:URL Mappings
+            
+        tickerlist: list
+            List of specific tickers to retrieve information for. Requires db name other than default. Minimum 10 tickers. 
+            Amount of related information retrieved dependent on length.
         ––––––––––
         
         '''
@@ -38,11 +42,27 @@ class FMPGet:
         #reqInfo
         rate_limit=10
         self.__reqinfo = ReqInfo(rate_limit,1,rate_limit-1)
+        
+        ##check for tickerlist & name
+        if tickerlist:
+            if db_name == 'default':
+                raise Exception('Must provide database name with custom ticker list')
+            else:
+                self.tickerlist = tickerlist
+                tl_size = len(tickerlist)
+                if tl_size > 250:
+                    tickerset  = 'sp500'
+                elif tl_size > 90:
+                    tickerset = 'nadaq100'
+                else:
+                    tickerset = 'dow'
     
         #public attributes
         self.tickerset = tickerset
         if db_name == 'default':
-            db_name = self.tickerset +'Financials'
+            #db_name = self.tickerset +'Financials'
+            db_name = 'Resources/' +self.tickerset +'Financials' #add to child ersource dir
+            #db_name = '../../'+ self.tickerset +'Financials' ##add 2 levels up 
         self.db_name = db_name + '.db'
         self.url_path = url_path
         
@@ -140,7 +160,11 @@ class FMPGet:
         indextable = {'dow':['^IXIC','^GSPC','^DJI'],
                       'ndaq100':['^IXIC','^GSPC','^DJI','^VIX','^RUA'],
                       'sp500':['^IXIC','^GSPC','^DJI','^VIX','^RUA','^FTSE','^NDX','^N225','GDAXI']}
-        stocks = list(pd.io.sql.read_sql('select symbol from '+tickertable.get(self.tickerset),con=self.__conn).symbol)
+        
+        if self.tickerlist:
+            stocks = self.tickerlist
+        else:
+            stocks = list(pd.io.sql.read_sql('select symbol from '+tickertable.get(self.tickerset),con=self.__conn).symbol)
         indexes = indextable.get(self.tickerset)
         
         return (stocks, indexes)
@@ -214,6 +238,8 @@ class FMPGet:
         
 
         
-        
-
+def getAPIKey(path):
+    '''Get api key from path'''
+    f = open(path,'r')
+    return f.read()
 

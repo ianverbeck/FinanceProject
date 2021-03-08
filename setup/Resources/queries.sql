@@ -7,3 +7,18 @@ where symbol in (select symbol
                 order by volAvg
                 limit 5)
 order by avgVolume;
+
+
+/*Get companies from symbols table that are associated with symbols from bankruptcy database*/
+---better to do this in python where its easier to manipulate the strings
+
+select *
+from G1_CV_SYMBOLS S
+where exists (select *
+              from BANKRUPTCY B
+              where S.name like '%' || B."Debtor Name" || '%')
+order by S.name;
+
+/*
+
+*/
