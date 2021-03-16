@@ -26,7 +26,7 @@ Get companies from symbols and join with bankruptcy
 select S.*, B.*
 from G1_CV_SYMBOLS S
 JOIN BANKRUPTCY B
-    ON S.name like '%' || B."Debtor Name" || '%';
+    ON S.name like '%' || B."Debtor Name" || '%'
 
 
 
